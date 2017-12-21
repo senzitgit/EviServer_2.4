@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.MobData" table="MOBDATA">
+		<meta attribute="class-description">
+			This class contains the mobile-DATA detail.
+		</meta>
+		<id name="randomCode" column="RANDOMCODE">
+        </id>
+		<property name="fileType" column="FILETYPE" type="string"/>
+		<property name="detail" column="DETAIL" type="string"/>
+		<property name="description" column="DESCRIPTION" type="string"/>
+		<property name="latitude" column="LATITUDE" type="string"/>
+		<property name="longitude" column="LONGITUDE" type="string"/>
+		<property name="createdOn" column="CREATEDON" type="timestamp"/>
+		<many-to-one name="createdBy" class="com.senzit.evidencer.server.model.MobUser" column="CREATEDBY">
+        </many-to-one>
+        <property name="status" column="STATUS"/>
+	</class>
+</hibernate-mapping>

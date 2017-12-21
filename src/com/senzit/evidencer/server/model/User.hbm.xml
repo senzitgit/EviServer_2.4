@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.User" table="USER">
+		<meta attribute="class-description">
+			This class contains the user detail.
+		</meta>
+		<id name="userName" column="USERNAME">
+        </id>
+		<property name="firstName" column="FIRSTNAME" type="string"/>
+		<property name="middleName" column="MIDDLENAME" type="string"/>
+		<property name="lastName" column="LASTNAME" type="string"/>
+		<property name="password" column="PASSWORD" type="string"/>
+		<property name="primaryEmailId" column="PRIMARYEMAILID" type="string"/>
+		<property name="secondaryEmailId" column="SECONDARYEMAILID" type="string"/>
+		<property name="primaryMobileNumber" column="PRIMARYMOBILENUMBER" type="string"/>
+		<property name="secondaryMobileNumber" column="SECONDARYMOBILENUMBER" type="string"/>
+		<property name="userType" column="USERTYPE" type="byte"/>
+		<property name="lastModifiedOn" column="LASTMODIFIEDON" type="timestamp"/>
+		<property name="createdOn" column="CREATEDON" type="timestamp"/>
+		<property name="createdBy" column="CREATEDBY" type="string"/>
+		
+        <many-to-one name="userRole" class="com.senzit.evidencer.server.model.Role" column="ROLEID">
+        </many-to-one>
+	</class>
+</hibernate-mapping>

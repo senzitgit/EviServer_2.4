@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.SecurityQuestion" table="SECURITYQUESTION">
+		<meta attribute="class-description">
+			This class contains the security question detail.
+		</meta>
+		<id name="userName" column="USERNAME">
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <one-to-one name="user" class="com.senzit.evidencer.server.model.User" 
+        			constrained="true">	
+     	</one-to-one>
+		<property name="securityQuestion1" column="QUESTION1" type="string"/>
+		<property name="securityAnswer1" column="ANSWER1" type="string"/>
+		<property name="securityQuestion2" column="QUESTION2" type="string"/>
+		<property name="securityAnswer2" column="ANSWER2" type="string"/>
+		<property name="securityQuestion3" column="QUESTION3" type="string"/>
+		<property name="securityAnswer3" column="ANSWER3" type="string"/>
+	</class>
+</hibernate-mapping>

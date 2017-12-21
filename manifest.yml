@@ -1,0 +1,12 @@
+---
+applications:
+- name: Evidencer
+  memory: 512M
+  host: evidencer
+  domain: mybluemix.net
+  services:
+  - ClearDB Managed MySQL Database-pb
+  - speech to text bgvba-speech_to_-1505306502832
+  - ClearDB Managed MySQL Database-29
+  - ClearDB Managed MySQL Database-lh
+  instances: 1

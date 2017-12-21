@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.Location" table="LOCATION">
+		<meta attribute="class-description">
+			This class contains the location detail.
+		</meta>
+		<id name="locationId" column="LOCATIONID">
+			<generator class="native"></generator>
+        </id>
+		<property name="locationName" column="LOCATIONNAME" type="string"/>
+		<property name="locationDescription" column="LOCATIONDESCRIPTION" type="string"/>		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.UserPrivilege" table="USERPRIVILEGE">
+		<meta attribute="class-description">
+			This class contains the role-privilege detail.
+		</meta>
+		<id name="userPrivilegeId" column="USERPRIVILEGEID">		
+			<generator class="native"></generator>
+        </id>
+        <many-to-one name="user" class="com.senzit.evidencer.server.model.User"	column="USERNAME">
+        </many-to-one>
+		<many-to-one name="privilege" class="com.senzit.evidencer.server.model.Privilege" 
+        			column="PRIVILEGEID">
+        </many-to-one>
+        <property name="dateOfPurchase" column="DATEOFPURCHASE" type="date"/>
+        <property name="dateOfExpire" column="DATEOFEXPIRE" type="date"/>
+	</class>
+</hibernate-mapping>

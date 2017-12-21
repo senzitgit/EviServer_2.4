@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.Role" table="ROLE">
+		<meta attribute="class-description">
+			This class contains the user-role details.
+		</meta>
+		<id name="roleId" type="int" column="ROLEID">		
+			<generator class="native"></generator>
+		</id>
+		<property name="roleName" column="ROLENAME" type="string"/>
+		<property name="roleDescription" column="ROLEDESCRIPTION" type="string"/>
+	</class>
+</hibernate-mapping>

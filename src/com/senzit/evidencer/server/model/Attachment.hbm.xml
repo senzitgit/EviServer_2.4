@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.Attachment" table="ATTACHMENT">
+		<meta attribute="class-description">
+			This class contains the attachment detail.
+		</meta>
+		<id name="attachmentId" column="ATTACHMENTID">
+            <generator class="native"></generator>
+        </id>
+		<property name="fileName" column="FILENAME" type="string"/>
+		<property name="attachmentName" column="ATTACHMENTNAME" type="string"/>
+		<property name="attachmentDescription" column="ATTACHMENTDESCRIPTION" type="string"/>
+		<property name="createdOn" column="CREATEDON" type="timestamp"/>
+		<many-to-one name="createdBy" class="com.senzit.evidencer.server.model.User" column="CREATEDBY">
+        </many-to-one>
+        <many-to-one name="caseEventDetail" class="com.senzit.evidencer.server.model.CaseEventDetail" column="CASEEVENTDETAILID">
+        </many-to-one>
+	</class>
+</hibernate-mapping>

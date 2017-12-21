@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.CaseType" table="CASETYPE">
+		<meta attribute="class-description">
+			This class contains the case type detail.
+		</meta>
+		<id name="caseTypeId" column="CASETYPEID">
+			<generator class="native"></generator>
+        </id>
+		<property name="caseType" column="CASETYPE" type="string" unique="true"/>
+		<property name="typeDescription" column="TYPEDESCRIPTION" type="string"/>		
+	</class>
+</hibernate-mapping>

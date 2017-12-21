@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.Court" table="COURT">
+		<meta attribute="class-description">
+			This class contains the court detail.
+		</meta>
+		<id name="courtId" column="COURTID">
+			<generator class="native"></generator>
+        </id>
+		<property name="courtName" column="COURTNAME" type="string"/>
+		<property name="courtDetails" column="COURTDETAILS" type="string"/>
+		
+        <many-to-one name="location" class="com.senzit.evidencer.server.model.Location" column="LOCATIONID">
+        </many-to-one>
+	</class>
+</hibernate-mapping>

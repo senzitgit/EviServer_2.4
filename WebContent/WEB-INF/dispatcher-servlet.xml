@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/websocket
+                           http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
+
+	<mvc:annotation-driven />
+       
+       <context:component-scan base-package="com.senzit.evidencer.server"/>
+        
+ 	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+         <property name="url" value="jdbc:mysql://us-cdbr-sl-dfw-01.cleardb.net/ibmx_182848726624968" />
+		<property name="username" value="bf7ff6b88c66b3" />
+		<property name="password" value="9369a5d6" />
+	<property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1"/>
+		
+       </bean>
+       <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        	<property name="dataSource" ref="dataSource"/>
+        	<property name="mappingLocations">
+            	<list>
+                	<value>classpath:com/senzit/evidencer/server/model/User.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/Role.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/SecurityQuestion.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/UserSession.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/UserPrivilege.hbm.xml</value>  
+                	<value>classpath:com/senzit/evidencer/server/model/Privilege.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/Attachment.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/CaseEventDetail.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/CaseInfo.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/CaseStatus.hbm.xml</value>  
+                	<value>classpath:com/senzit/evidencer/server/model/CaseType.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/Court.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/Location.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/Participant.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/PrivateNote.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/MobUser.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/MobData.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/MobFile.hbm.xml</value>
+                	<value>classpath:com/senzit/evidencer/server/model/LandEPath.hbm.xml</value>
+            	</list>
+        	</property>
+        	<property name="hibernateProperties">
+            	<props>
+                	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	   				<prop key="hibernate.hbm2ddl.auto">update</prop>
+	   				<prop key="hibernate.show_sql">true</prop>
+            	</props>
+        	</property>
+       </bean>
+       <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        	<property name="sessionFactory" ref="sessionFactory"/>
+       </bean>
+       <tx:advice id="txAdvice" transaction-manager="transactionManager">
+       		<tx:attributes>
+            	<tx:method name="*"/>
+        	</tx:attributes>
+       </tx:advice>
+       <aop:config>
+        	<aop:pointcut id="eviOperation"
+        				  expression="execution(* com.senzit.evidencer.server.service.AuthService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.FileService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.PlayerService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.PortalService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.RecordService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.RegService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.SearchService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.UserService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.LicenceService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.MobService.*(..))
+        				  			||execution(* com.senzit.evidencer.server.service.LEService.*(..))"/>        				  
+        	<aop:advisor advice-ref="txAdvice" pointcut-ref="eviOperation"/>
+        </aop:config>
+        
+       <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       		<property name="maxUploadSize" value="268435456"/> 
+       </bean>
+       
+       <!-- DB accessing DAO beans -->
+    	
+    	<bean id="userdao" class="com.senzit.evidencer.server.dao.UserDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="privilegedao" class="com.senzit.evidencer.server.dao.PrivilegeDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="questiondao" class="com.senzit.evidencer.server.dao.SecurityQuestionDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="portaldao" class="com.senzit.evidencer.server.dao.PortalDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="attachdao" class="com.senzit.evidencer.server.dao.AttachmentDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="casedao" class="com.senzit.evidencer.server.dao.CaseDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="participantdao" class="com.senzit.evidencer.server.dao.ParticipantDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="privatedao" class="com.senzit.evidencer.server.dao.PrivateNoteDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="mobdao" class="com.senzit.evidencer.server.dao.MobDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="ledao" class="com.senzit.evidencer.server.dao.LEDaoImp">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		
+		<!-- Service Beans -->
+		
+		<bean id="authservice" class="com.senzit.evidencer.server.service.AuthServiceImp">
+			<property name="privilegeDao" ref="privilegedao"></property>
+			<property name="userDao" ref="userdao"></property>
+			<property name="qnDao" ref="questiondao"></property>
+		</bean>
+		<bean id="userservice" class="com.senzit.evidencer.server.service.UserServiceImp">
+			<property name="userDao" ref="userdao"></property>
+			<property name="qnDao" ref="questiondao"></property>
+		</bean>
+		<bean id="regservice" class="com.senzit.evidencer.server.service.RegServiceImp">
+			<property name="userDao" ref="userdao"></property>
+			<property name="qnDao" ref="questiondao"></property>
+			<property name="privilegeDao" ref="privilegedao"></property>
+		</bean>
+		<bean id="portalservice" class="com.senzit.evidencer.server.service.PortalServiceImp">
+			<property name="portalDao" ref="portaldao"></property>
+		</bean>
+		<bean id="fileservice" class="com.senzit.evidencer.server.service.FileServiceImp">
+			<property name="attachmentDao" ref="attachdao"></property>
+			<property name="privateDao" ref="privatedao"></property>
+			<property name="caseDao" ref="casedao"></property>
+		</bean>
+		<bean id="playerservice" class="com.senzit.evidencer.server.service.PlayerServiceImp">
+			<property name="attachmentDao" ref="attachdao"></property>
+			<property name="privateDao" ref="privatedao"></property>
+			<property name="caseDao" ref="casedao"></property>
+		</bean>
+		<bean id="recordservice" class="com.senzit.evidencer.server.service.RecordServiceImp">
+			<property name="caseDao" ref="casedao"></property>
+			<property name="participantDao" ref="participantdao"></property>
+		</bean>
+		<bean id="searchservice" class="com.senzit.evidencer.server.service.SearchServiceImp">
+			<property name="caseDao" ref="casedao"></property>
+		</bean>
+		<bean id="licenceservice" class="com.senzit.evidencer.server.service.LicenceServiceImp">
+			<property name="privilegeDao" ref="privilegedao"></property>
+			<property name="portalDao" ref="portaldao"></property>
+		</bean>
+		<bean id="mobservice" class="com.senzit.evidencer.server.service.MobServiceImp">
+			<property name="mobDao" ref="mobdao"></property>
+		</bean>
+		<bean id="leservice" class="com.senzit.evidencer.server.service.LEServiceImp">
+			<property name="leDao" ref="ledao"></property>
+		</bean>
+		
+</beans>

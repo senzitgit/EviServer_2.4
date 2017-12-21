@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.MobUser" table="MOBUSER">
+		<meta attribute="class-description">
+			This class contains the mob-user detail.
+		</meta>
+		<id name="email" column="EMAIL">
+        </id>
+		<property name="password" column="PASSWORD" type="string"/>
+	</class>
+</hibernate-mapping>

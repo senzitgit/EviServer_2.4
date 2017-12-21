@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.MobFile" table="MOBFILE">
+		<meta attribute="class-description">
+			This class contains the mobile-FILE detail.
+		</meta>
+		<id name="fileId" column="FILEID">
+		    <generator class="native"></generator>
+        </id>
+		<property name="fileName" column="FILENAME" type="string"/>
+		<many-to-one name="mobData" class="com.senzit.evidencer.server.model.MobData" column="randomCode">
+        </many-to-one>
+	</class>
+</hibernate-mapping>

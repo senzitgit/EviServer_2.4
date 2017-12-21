@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.CaseStatus" table="CASESTATUS">
+		<meta attribute="class-description">
+			This class contains the case status detail.
+		</meta>
+		<id name="caseStatusId" column="CASESTATUSID">
+			<generator class="native"></generator>
+        </id>
+		<property name="status" column="STATUS" type="string" unique="true"/>
+		<property name="statusDescription" column="STATUSDESCRIPTION" type="string"/>		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.CaseEventDetail" table="CASEEVENTDETAIL">
+		<meta attribute="class-description">
+			This class contains the case event detail.
+		</meta>
+		<id name="caseEventDetailId" column="CASEEVENTDETAILID">
+            <generator class="native"></generator>
+        </id>
+		<property name="sittingNo" column="SITTINGNO" type="int"/>
+		<property name="sessionNo" column="SESSIONNO" type="int"/>
+		<property name="eventDate" column="EVENTDATE" type="date"/>
+		<property name="logNotes" column="LOGNOTES" type="text"/>
+		
+		<property name="toneAnalyze" column="TONEANALYZE" type="text"/>
+		<property name="sentimentalAnalyze" column="SENTIANALYZE" type="text"/>
+		<property name="initiatedFrom" column="INITIATED" type="string"/>
+		<property name="linkCrime" column="LINKCRIME" type="string"/>
+		
+		<!-- also use clob instead of text -->
+		<property name="ftpLocation" column="FTPLOCATION" type="string"/>
+		<property name="startTime" column="STARTTIME" type="timestamp"/>
+		<property name="endTime" column="ENDTIME" type="timestamp"/>
+		<property name="privateNoteFlag" column="PRIVATENOTEFLAG" type="boolean"/>
+		<property name="attachmentFlag" column="ATTACHMENTFLAG" type="boolean"/>
+		<property name="confidential" column="CONFIDENTIAL" type="boolean"/>	
+		
+        <many-to-one name="caseId" class="com.senzit.evidencer.server.model.CaseInfo" column="CASENO">
+        </many-to-one>
+        <many-to-one name="court" class="com.senzit.evidencer.server.model.Court" column="COURTID">
+        </many-to-one>
+	</class>
+</hibernate-mapping>       <!--	lazy="false" > -->

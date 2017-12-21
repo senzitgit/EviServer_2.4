@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.CaseInfo" table="CASEINFO">
+		<meta attribute="class-description">
+			This class contains the case detail.
+		</meta>
+		<id name="caseNo" column="CASENO">
+        </id>
+		<property name="caseTitle" column="CASETITLE" type="string"/>
+		<property name="caseDescription" column="CASEDESCRIPTION" type="text"/>
+		
+        <many-to-one name="caseType" class="com.senzit.evidencer.server.model.CaseType" column="CASETYPEID">
+        </many-to-one>
+        <many-to-one name="caseStatus" class="com.senzit.evidencer.server.model.CaseStatus" column="CASESTATUSID">
+        </many-to-one>
+	</class>
+</hibernate-mapping>

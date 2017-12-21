@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.senzit.evidencer.server.model.Participant" table="PARTICIPANT">
+		<meta attribute="class-description">
+			This class contains the participant detail.
+		</meta>
+		<id name="participantId" column="PARTICIPANTID">
+            <generator class="native"></generator>
+        </id>
+		<property name="participantName" column="PARTICIPANTNAME" type="string"/>
+		<property name="participantCategory" column="PARTICIPANTCATEGORY" type="string"/>
+		
+        <many-to-one name="caseEventDetail" class="com.senzit.evidencer.server.model.CaseEventDetail" column="CASEEVENTDETAILID">
+        </many-to-one>
+	</class>
+</hibernate-mapping>
