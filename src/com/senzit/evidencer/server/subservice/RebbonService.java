@@ -23,7 +23,7 @@ public class RebbonService {
 	
 	public String requestToRebbon(String postData){
 		
-		String rebbonUrl="https://rebbon.mybluemix.net/RebbonHandler";
+		String rebbonUrl="http://192.168.10.50:8080/Rebbon/RebbonHandler";
 		////////////////////////////////////////////////////
 		log.debug("RebbonUrl:"+rebbonUrl);
 		log.debug("RebbonPostData:"+postData);
@@ -94,15 +94,13 @@ public class RebbonService {
 			Properties feed2 = new Properties();
 			Properties feed3 = new Properties();
 			Properties feed4 = new Properties();
-			Properties feed5 = new Properties();
-			Properties feed6 = new Properties();
+
 			
 			JSONObject cam1 = new JSONObject();
 			JSONObject cam2 = new JSONObject();
 			JSONObject cam3 = new JSONObject();
 			JSONObject cam4 = new JSONObject();
-			JSONObject cam5 = new JSONObject();
-			JSONObject cam6 = new JSONObject();
+			
 						
 			cam1=jsonObj.getJSONObject("CAM1");
 			feed1.put("Url",(String) cam1.get("Url"));
@@ -126,15 +124,6 @@ public class RebbonService {
 			feed4.put("Aud",(String) cam4.get("Aud"));		
 			result.put("CAM4", feed4);
 			
-			cam5=jsonObj.getJSONObject("CAM5");
-			feed5.put("Url",(String) cam5.get("Url"));
-			feed5.put("Aud",(String) cam5.get("Aud"));		
-			result.put("CAM5", feed5);
-			
-			cam6=jsonObj.getJSONObject("CAM6");
-			feed6.put("Url",(String) cam6.get("Url"));
-			feed6.put("Aud",(String) cam6.get("Aud"));		
-			result.put("CAM6", feed6);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -220,8 +209,7 @@ public class RebbonService {
 			String v2 = (String)jsonObj.get("VideoFeed2");
 			String v3 = (String)jsonObj.get("VideoFeed3");
 			String v4 = (String)jsonObj.get("VideoFeed4");
-			String v5 = (String)jsonObj.get("VideoFeed5");
-			String v6 = (String)jsonObj.get("VideoFeed6");
+			
 			
 			if( ! (RebbonService.exists(v1))){
 				// ONLY FIRST VIDEO IS CHECKED
@@ -235,8 +223,7 @@ public class RebbonService {
 			result.put("videoFeed2", v2);
 			result.put("videoFeed3", v3);
 			result.put("videoFeed4", v4);
-			result.put("videoFeed5", v5);
-			result.put("videoFeed6", v6);
+			
 			result.put("audioFeed1", (String) jsonObj.get("AudioFeed1"));
 			result.put("audioFeed2", (String) jsonObj.get("AudioFeed2"));
 			result.put("audioFeed3", (String) jsonObj.get("AudioFeed3"));

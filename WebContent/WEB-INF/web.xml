@@ -34,7 +34,7 @@
   </servlet>
   <context-param>
     <param-name>propertyFilePath</param-name>
-    <param-value>evidencer.properties</param-value>
+    <param-value>/home/rebbon/Documents/server-prop/evidencer.properties</param-value>
   </context-param>
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>

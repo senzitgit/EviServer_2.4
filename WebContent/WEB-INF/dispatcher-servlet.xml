@@ -25,9 +25,9 @@
  	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-         <property name="url" value="jdbc:mysql://us-cdbr-sl-dfw-01.cleardb.net/ibmx_182848726624968" />
-		<property name="username" value="bf7ff6b88c66b3" />
-		<property name="password" value="9369a5d6" />
+          <property name="url" value="jdbc:mysql://localhost:3306/evi_new" />
+		<property name="username" value="senzit" />
+		<property name="password" value="senzituser" />
 	<property name="testOnBorrow" value="true"/>
         <property name="validationQuery" value="SELECT 1"/>
 		
